@@ -1,9 +1,9 @@
-import "./Home.css";
+import "./Admin.css";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
-import Products from "../../components/Products/Products";
+import ProductsAdmin from "../../components/ProductsAdmin/ProductsAdmin";
 
-const Home = () => {
+const Admin = () => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("View All");
   const [categories, setCategories] = useState([]);
@@ -38,7 +38,7 @@ const Home = () => {
         changeMinPrice={(minPrice) => setMinPrice(minPrice)}
         changeMaxPrice={(maxPrice) => setMaxPrice(maxPrice)}
       />
-      <Products
+      <ProductsAdmin
         products={products}
         category={category}
         minPrice={minPrice}
@@ -47,4 +47,4 @@ const Home = () => {
     </>
   );
 };
-export default Home;
+export default Admin;

@@ -9,6 +9,8 @@ const app = express();
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
 
+console.log(process.env.MONGO_URI);
+
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

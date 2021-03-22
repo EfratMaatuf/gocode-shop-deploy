@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import ProductId from "./pages/ProductId/ProductId";
 import ColorsContext, { Colors } from "./contexts/ColorsContext";
 import ContactUs from "./pages/ContactUs/ContactUs";
+import Admin from "./pages/Admin/Admin";
 
 const App = () => {
   const [colors, setColors] = useState(Colors.begin);
@@ -30,6 +31,9 @@ const App = () => {
             </Route>
             <Route path="/contactUs">
               <ContactUs />
+            </Route>
+            <Route path="/admin">
+              <Admin />
             </Route>
             <Route path="/">
               <Home />

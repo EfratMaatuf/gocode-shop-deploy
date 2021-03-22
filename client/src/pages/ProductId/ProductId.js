@@ -5,8 +5,8 @@ import "./ProductId.css";
 const ProductId = ({ match }) => {
   const [product, setProduct] = useState();
   useEffect(() => {
-    fetch(`/api/products/${match.params.productId}`)
-      // fetch(`https://fakestoreapi.com/products/${match.params.productId}`)
+    // fetch(`/api/products/${match.params.productId}`)
+    fetch(`https://fakestoreapi.com/products/${match.params.productId}`)
       .then((response) => response.json())
       .then((data) => setProduct(data));
   }, [match.params.productId]);

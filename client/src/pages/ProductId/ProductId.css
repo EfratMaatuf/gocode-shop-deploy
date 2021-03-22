@@ -25,22 +25,15 @@ nav {
   font-family: cursive;
 }
 .divImgProductId {
-  /* transform: rotate(7deg);
-  margin: 3%;
-  border-radius: 5%;
-  max-width: 45%;
-  max-height: 276px;
-  float: left; */
   grid-column: 1/3;
   grid-row: 1/5;
   width: 100%;
   height: 100%;
 }
-button {
+.buyNow {
   display: inline-block;
   height: 50px;
   width: 176px;
-  /* margin: 0 40px 0 16px; */
   box-sizing: border-box;
   border: transparent;
   border-radius: 60px;
@@ -71,9 +64,6 @@ button {
   grid-row: 1/2;
 }
 .description {
-  /* padding-top: 15px;
-  padding-right: 15px;
-  margin-bottom: 5px; */
   grid-column: 3/5;
   grid-template-columns: 2/4;
   font-family: -webkit-pictograph;
