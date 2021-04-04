@@ -12,8 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     async function fetchData() {
-      // const res = await fetch("/api/products");
-      const res = await fetch("https://fakestoreapi.com/products");
+      const res = await fetch("/api/products");
       const json = await res.json();
       setProducts(json);
     }

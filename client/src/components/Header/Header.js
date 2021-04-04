@@ -29,7 +29,12 @@ const Header = ({
 
   return (
     <nav className="product-filter">
-      <h1 className="titleHome">Jackets</h1>
+      <h1 className="titleHome">My Shop</h1>
+      <Sort
+        categories={categories}
+        changeCategory={(category) => changeCategory(category)}
+      />
+      &nbsp;&nbsp;
       <label className="labelPrice">{minPrice}$</label>
       &nbsp;
       <Slider
@@ -44,11 +49,6 @@ const Header = ({
       />
       &nbsp;
       <label className="labelPrice">{maxPrice}$</label>
-      &nbsp;&nbsp;
-      <Sort
-        categories={categories}
-        changeCategory={(category) => changeCategory(category)}
-      />
     </nav>
   );
 };

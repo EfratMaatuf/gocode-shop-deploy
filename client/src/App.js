@@ -18,7 +18,7 @@ const App = () => {
           setColors(colors === Colors.begin ? Colors.change : Colors.begin)
         }
       >
-        change background
+        change color
       </button>
       <Router>
         <div

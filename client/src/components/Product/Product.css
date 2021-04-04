@@ -1,6 +1,9 @@
 .imgProduct {
   object-fit: contain;
 }
+.imgProduct:hover {
+  object-fit: fill;
+}
 .product-sale {
   margin-top: -1em;
 }

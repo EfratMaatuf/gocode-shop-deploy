@@ -24,12 +24,7 @@ nav {
   padding-bottom: 7px;
   font-family: cursive;
 }
-.divImgProductId {
-  grid-column: 1/3;
-  grid-row: 1/5;
-  width: 100%;
-  height: 100%;
-}
+
 .buyNow {
   display: inline-block;
   height: 50px;
@@ -75,8 +70,15 @@ nav {
   align-self: center;
   width: 80%;
 }
+.divImgProductId {
+  grid-column: 1/3;
+  grid-row: 1/5;
+  width: 50%;
+  height: 50%;
+}
 .imgProductId {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  /* width: 100%;
+  height: 100%; */
+  /* height: -webkit-fill-available; */
+  max-width: -webkit-fill-available;
 }

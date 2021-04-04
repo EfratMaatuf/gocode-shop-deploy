@@ -2,16 +2,16 @@ import { createContext } from "react";
 
 export const Colors = {
   begin: {
-    foreground: "rgb(1, 46, 101)",
-    background: "rgb(145, 185, 184)",
-    backgroundCountDown: "rgb(0, 106, 156)",
-    foregroundCountDown: "rgb(204, 51, 51)",
+    // foreground: "rgb(1, 46, 101)",
+    // background: "rgb(255, 255, 255)",
+    backgroundCountDown: "rgb(131, 89, 108)",
+    foregroundCountDown: "rgb(207, 207, 207)",
   },
   change: {
-    foreground: "rgb(145, 185, 184)",
-    background: "rgb(1, 46, 101)",
-    backgroundCountDown: "rgb(204, 51, 51)",
-    foregroundCountDown: "rgb(0, 106, 156)",
+    // foreground: "rgb(255, 255, 255)",
+    // background: "rgb(1, 46, 101)",
+    backgroundCountDown: "rgb(207, 207, 207)",
+    foregroundCountDown: "rgb(131, 89, 108)",
   },
 };
 

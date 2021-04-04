@@ -4,16 +4,16 @@ import Header from "../../components/Header/Header";
 import ProductsAdmin from "../../components/ProductsAdmin/ProductsAdmin";
 
 const Admin = () => {
+  // const [productsUpdate,setProductsUpdate]=useState([]);
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("View All");
   const [categories, setCategories] = useState([]);
-  const [minPrice, setMinPrice] = useState([0]);
-  const [maxPrice, setMaxPrice] = useState([1000]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000);
 
   useEffect(() => {
     async function fetchData() {
-      // const res = await fetch("/api/products");
-      const res = await fetch("https://fakestoreapi.com/products");
+      const res = await fetch("/api/products");
       const json = await res.json();
       setProducts(json);
     }
@@ -41,6 +41,7 @@ const Admin = () => {
       <ProductsAdmin
         products={products}
         category={category}
+        categories={categories}
         minPrice={minPrice}
         maxPrice={maxPrice}
       />

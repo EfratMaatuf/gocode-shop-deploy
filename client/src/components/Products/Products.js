@@ -5,8 +5,8 @@ import Product from "../Product/Product";
 import PropTypes from "prop-types";
 
 const Products = ({ products, category, minPrice, maxPrice }) => {
-  const [sale, setSale] = useState(true);
-  const productsOnSale = [2, 3, 4, 7, 9, 12, 15, 16, 17, 18, 20]; //???
+  const [saleTime, setSaleTime] = useState(true);
+  // const productsOnSale = [2, 3, 4, 7, 9, 12, 15, 16, 17, 18, 20]; //???
   let productsFilter;
   let productsFilterPrice;
   if (category !== "View All") {
@@ -21,15 +21,15 @@ const Products = ({ products, category, minPrice, maxPrice }) => {
   );
   return (
     <section className="products">
-      <SaleCountDown end={() => setSale(false)} />
-      {productsFilterPrice.map(({ _id, title, image, price }) => (
+      <SaleCountDown end={() => setSaleTime(false)} />
+      {productsFilterPrice.map(({ _id, title, image, price, sale }) => (
         <Product
           key={_id}
           id={_id}
           title={title}
           image={image}
           price={price}
-          sale={sale && productsOnSale.indexOf(_id) !== -1 ? true : false}
+          sale={saleTime && sale}
         />
       ))}
     </section>

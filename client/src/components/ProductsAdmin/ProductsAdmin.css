@@ -1,11 +1,12 @@
-table {
+.adminProducts {
   border-collapse: collapse;
   width: 100%;
 }
-table,
+.adminProducts,
 th,
 td {
   border: 1px solid black;
+  vertical-align: top;
 }
 th {
   padding: 5px;

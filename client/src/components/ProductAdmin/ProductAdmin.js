@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ProductAdmin.css";
+import saleImage from "../Product/saleImage.png";
 import PropTypes from "prop-types";
 
 const ProductAdmin = ({
@@ -11,54 +12,141 @@ const ProductAdmin = ({
   sale,
   description,
 }) => {
+  const [chengeTitle, setChengeTitle] = useState(title);
+  const [chengeCategory, setChengeCategory] = useState(category);
+  const [chengeDescription, setChengeDescription] = useState(description);
+  const [chengePrice, setChengePrice] = useState(price);
+  const [chengeImage, setChengeImage] = useState(image);
   const [onSale, setOnSale] = useState(sale);
+
+  const updateProduct = async () => {
+    const res = await fetch("/api/products/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: chengeTitle,
+        category: chengeCategory,
+        description: chengeDescription,
+        price: chengePrice,
+        image: chengeImage,
+        sale: onSale,
+      }),
+    });
+    const ans = await res.json();
+    if (ans.Text === "OK!") {
+      alert("Updated");
+    }
+  };
+  const deleteProduct = async () => {
+    fetch("/api/products/" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.text()) // or res.json()
+      .then((res) => {
+        console.log(res);
+        if (res === "OK!") {
+          alert("Product deleted");
+          window.location.reload();
+        }
+      });
+  };
   return (
     <tr>
       <td>
-        <input type="text" id="title" name="title" value={title} />
+        <textarea
+          id="title"
+          name="title"
+          rows="5"
+          cols="25"
+          value={chengeTitle}
+          onChange={(e) => setChengeTitle(e.target.value)}
+        />
       </td>
       <td>
-        <input type="text" id="category" name="category" value={category} />
+        <input
+          type="text"
+          id="category"
+          name="category"
+          value={chengeCategory}
+          onChange={(e) => setChengeCategory(e.target.value)}
+        />
       </td>
       <td>
-        <textarea id="w3review" name="w3review" rows="4" cols="50">
-          {description}
-        </textarea>
+        <textarea
+          id="description"
+          name="description"
+          rows="5"
+          cols="25"
+          value={chengeDescription}
+          onChange={(e) => setChengeDescription(e.target.value)}
+        />
       </td>
       <td>
         <input
           type="number"
           id="price"
-          name="price"
           min="0"
           max="1000"
-          value={price}
+          value={chengePrice}
+          onChange={(e) => setChengePrice(e.target.value)}
         />
       </td>
       <td>
-        <input type="text" id="title" name="title" />
-        {/* //value //??? */}
-        <img src={image} alt="" />
+        <input
+          type="text"
+          id="image"
+          value={chengeImage}
+          onChange={(e) => setChengeImage(e.target.value)}
+        />
+        <div className="divForImg">
+          <img src={chengeImage} alt="" className="imgAdmin" />
+        </div>
       </td>
       <td>
-        {onSale ? (
-          <input type="checkbox" id="onSale" checked />
-        ) : (
-          <input type="checkbox" id="onSale" />
-        )}
+        <input
+          type="checkbox"
+          id="onSale"
+          checked={onSale}
+          onChange={() => {
+            setOnSale(!onSale);
+          }}
+        />
+        <br />
+        {onSale && <img src={saleImage} alt="" className="saleImageAdmin" />}
       </td>
       <td>
-        <button>update</button>
-        <button> delete</button>
+        <button
+          className="updateProduct"
+          onClick={() => {
+            if (window.confirm("You are sure you want to delete this item?"))
+              updateProduct();
+          }}
+        >
+          update
+        </button>
+        <br />
+
+        <button
+          className="deleteProduct"
+          onClick={() => {
+            if (window.confirm("You are sure you want to delete this item?"))
+              deleteProduct();
+          }}
+        >
+          delete
+        </button>
       </td>
     </tr>
   );
 };
 ProductAdmin.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   title: PropTypes.string,
   image: PropTypes.string,
   price: PropTypes.number,
+  description: PropTypes.string,
   sale: PropTypes.bool,
 };
 export default ProductAdmin;

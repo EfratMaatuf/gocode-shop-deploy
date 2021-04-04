@@ -4,7 +4,13 @@ import PropTypes from "prop-types";
 import ProductAdmin from "../ProductAdmin/ProductAdmin";
 import NewProductAdmin from "../NewProductAdmin/NewProductAdmin";
 
-const ProductsAdmin = ({ products, category, minPrice, maxPrice }) => {
+const ProductsAdmin = ({
+  products,
+  category,
+  categories,
+  minPrice,
+  maxPrice,
+}) => {
   let productsFilter;
   let productsFilterPrice;
   if (category !== "View All") {
@@ -18,7 +24,7 @@ const ProductsAdmin = ({ products, category, minPrice, maxPrice }) => {
     ({ price }) => price > minPrice && price < maxPrice
   );
   return (
-    <table>
+    <table className="adminProducts">
       <thead>
         <tr>
           <th>Title</th>
@@ -31,18 +37,21 @@ const ProductsAdmin = ({ products, category, minPrice, maxPrice }) => {
         </tr>
       </thead>
       <tbody>
-        <NewProductAdmin />
-        {productsFilterPrice.map(({ _id, title, image, price, category }) => (
-          <ProductAdmin
-            key={_id}
-            id={_id}
-            title={title}
-            image={image}
-            price={price}
-            category={category}
-            // sale={}
-          />
-        ))}
+        <NewProductAdmin categories={categories} />
+        {productsFilterPrice.map(
+          ({ _id, title, image, price, category, sale, description }) => (
+            <ProductAdmin
+              key={_id}
+              id={_id}
+              title={title}
+              image={image}
+              price={price}
+              category={category}
+              description={description}
+              sale={sale}
+            />
+          )
+        )}
       </tbody>
     </table>
   );
@@ -50,6 +59,7 @@ const ProductsAdmin = ({ products, category, minPrice, maxPrice }) => {
 ProductsAdmin.propTypes = {
   products: PropTypes.array,
   category: PropTypes.string,
+  categories: PropTypes.array,
   minPrice: PropTypes.number,
   maxPrice: PropTypes.number,
 };
