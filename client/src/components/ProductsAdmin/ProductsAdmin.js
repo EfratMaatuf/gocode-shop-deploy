@@ -1,16 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./ProductsAdmin.css";
 import PropTypes from "prop-types";
 import ProductAdmin from "../ProductAdmin/ProductAdmin";
 import NewProductAdmin from "../NewProductAdmin/NewProductAdmin";
+import ProductsContext from "../../contexts/ProductsContext";
 
-const ProductsAdmin = ({
-  products,
-  category,
-  categories,
-  minPrice,
-  maxPrice,
-}) => {
+const ProductsAdmin = ({ category, categories, minPrice, maxPrice }) => {
+  const [products, setProducts] = useContext(ProductsContext);
   let productsFilter;
   let productsFilterPrice;
   if (category !== "View All") {
@@ -57,7 +53,6 @@ const ProductsAdmin = ({
   );
 };
 ProductsAdmin.propTypes = {
-  products: PropTypes.array,
   category: PropTypes.string,
   categories: PropTypes.array,
   minPrice: PropTypes.number,

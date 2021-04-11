@@ -27,23 +27,7 @@ main {
   color: black;
   background-color: white;
 }
-footer {
-  position: inherit;
-  /* ; relative*/
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: rgb(166, 167, 151);
-  color: rgb(1, 46, 101);
-}
-.footer-body {
+.navApp {
   display: flex;
-  justify-content: space-around;
-  margin-top: 5px;
-  font-family: monospace;
-  font-size: 18px;
-}
-.footer-copyright {
-  text-align: left;
-  font-family: monospace;
+  justify-content: space-between;
 }

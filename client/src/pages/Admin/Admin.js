@@ -1,10 +1,10 @@
 import "./Admin.css";
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
+import ProductsContext from "../../contexts/ProductsContext";
 import ProductsAdmin from "../../components/ProductsAdmin/ProductsAdmin";
 
 const Admin = () => {
-  // const [productsUpdate,setProductsUpdate]=useState([]);
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("View All");
   const [categories, setCategories] = useState([]);
@@ -31,7 +31,7 @@ const Admin = () => {
     setCategories(categories1);
   }, [products]);
   return (
-    <>
+    <ProductsContext.Provider value={[products, setProducts]}>
       <Header
         categories={categories}
         changeCategory={(category) => setCategory(category)}
@@ -39,13 +39,12 @@ const Admin = () => {
         changeMaxPrice={(maxPrice) => setMaxPrice(maxPrice)}
       />
       <ProductsAdmin
-        products={products}
         category={category}
         categories={categories}
         minPrice={minPrice}
         maxPrice={maxPrice}
       />
-    </>
+    </ProductsContext.Provider>
   );
 };
 export default Admin;

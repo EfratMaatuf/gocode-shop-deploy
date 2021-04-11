@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./NewProductAdmin.css";
 import saleImage from "../Product/saleImage.png";
+import ProductsContext from "../../contexts/ProductsContext";
 
 const NewProductAdmin = ({ categories }) => {
   const [title, setTitle] = useState("");
@@ -9,22 +10,9 @@ const NewProductAdmin = ({ categories }) => {
   const [price, setPrice] = useState();
   const [image, setImage] = useState("");
   const [sale, setSale] = useState(false);
+  const [products, setProducts] = useContext(ProductsContext);
 
   const newProduct = async () => {
-    console.log(
-      "title:  " +
-        title +
-        "  category:  " +
-        category +
-        "  description:  " +
-        description +
-        "  price:  " +
-        price +
-        "  image:  " +
-        image +
-        "  sale:  " +
-        sale
-    );
     const res = await fetch("/api/products", {
       method: "POST",
       headers: {
@@ -40,17 +28,19 @@ const NewProductAdmin = ({ categories }) => {
       }),
     });
     const ans = await res.json();
-    if (ans.Text === "OK!") {
-      /* לעדכן את רשימת המוצרים*/
+    console.log("ans:");
+    console.log(ans);
+    if (ans.Text) {
+      alert(ans.Text);
+    } else {
+      alert("The product is added");
+      setProducts([ans, ...products]);
       setTitle("");
       setCategory("");
       setDescription("");
-      setPrice(0);
+      setPrice("");
       setImage("");
       setSale(false);
-      alert("The product is added");
-    } else {
-      alert(ans.Text);
     }
   };
   return (
@@ -65,7 +55,6 @@ const NewProductAdmin = ({ categories }) => {
         />
       </td>
       <td>
-        {/* id="category" */}
         <input
           type="text"
           list="category"
@@ -74,9 +63,10 @@ const NewProductAdmin = ({ categories }) => {
           onChange={(e) => setCategory(e.target.value)}
         />
         <datalist id="category">
-          {categories.map((option, index) => (
-            <option value={option} key={index} />
-          ))}
+          {categories.map(
+            (option, index) =>
+              option !== "View All" && <option value={option} key={index} />
+          )}
         </datalist>
       </td>
       <td>

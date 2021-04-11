@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ProductAdmin.css";
 import saleImage from "../Product/saleImage.png";
 import PropTypes from "prop-types";
+import ProductsContext from "../../contexts/ProductsContext";
 
 const ProductAdmin = ({
   id,
@@ -18,6 +19,7 @@ const ProductAdmin = ({
   const [chengePrice, setChengePrice] = useState(price);
   const [chengeImage, setChengeImage] = useState(image);
   const [onSale, setOnSale] = useState(sale);
+  const [products, setProducts] = useContext(ProductsContext);
 
   const updateProduct = async () => {
     const res = await fetch("/api/products/" + id, {
@@ -35,7 +37,7 @@ const ProductAdmin = ({
       }),
     });
     const ans = await res.json();
-    if (ans.Text === "OK!") {
+    if (ans.Text) {
       alert("Updated");
     }
   };
@@ -45,10 +47,9 @@ const ProductAdmin = ({
     })
       .then((res) => res.text()) // or res.json()
       .then((res) => {
-        console.log(res);
         if (res === "OK!") {
+          setProducts(products.filter(({ _id }) => _id !== id));
           alert("Product deleted");
-          window.location.reload();
         }
       });
   };
