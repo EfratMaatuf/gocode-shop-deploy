@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Products.css";
 import SaleCountDown from "../SaleCountDown/SaleCountDown";
 import Product from "../Product/Product";
 import PropTypes from "prop-types";
+import ProductsContext from "../../contexts/ProductsContext";
 
-const Products = ({ products, category, minPrice, maxPrice }) => {
+const Products = ({ category, minPrice, maxPrice }) => {
+  const { products } = useContext(ProductsContext);
   const [saleTime, setSaleTime] = useState(true);
-  // const productsOnSale = [2, 3, 4, 7, 9, 12, 15, 16, 17, 18, 20]; //???
   let productsFilter;
   let productsFilterPrice;
   if (category !== "View All") {
@@ -36,7 +37,6 @@ const Products = ({ products, category, minPrice, maxPrice }) => {
   );
 };
 Products.propTypes = {
-  products: PropTypes.array,
   category: PropTypes.string,
   minPrice: PropTypes.number,
   maxPrice: PropTypes.number,

@@ -6,7 +6,7 @@ import NewProductAdmin from "../NewProductAdmin/NewProductAdmin";
 import ProductsContext from "../../contexts/ProductsContext";
 
 const ProductsAdmin = ({ category, categories, minPrice, maxPrice }) => {
-  const [products, setProducts] = useContext(ProductsContext);
+  const { products } = useContext(ProductsContext);
   let productsFilter;
   let productsFilterPrice;
   if (category !== "View All") {

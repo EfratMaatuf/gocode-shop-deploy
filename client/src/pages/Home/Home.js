@@ -1,23 +1,16 @@
 import "./Home.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Header from "../../components/Header/Header";
 import Products from "../../components/Products/Products";
+import ProductsContext from "../../contexts/ProductsContext";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState("View All");
+  const { products } = useContext(ProductsContext);
   const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState("View All");
   const [minPrice, setMinPrice] = useState([0]);
   const [maxPrice, setMaxPrice] = useState([1000]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/api/products");
-      const json = await res.json();
-      setProducts(json);
-    }
-    fetchData();
-  }, []);
   useEffect(() => {
     let categories1;
     const groupBy = (xs, key) =>
@@ -29,6 +22,7 @@ const Home = () => {
     categories1.unshift("View All");
     setCategories(categories1);
   }, [products]);
+
   return (
     <>
       <Header
@@ -37,12 +31,7 @@ const Home = () => {
         changeMinPrice={(minPrice) => setMinPrice(minPrice)}
         changeMaxPrice={(maxPrice) => setMaxPrice(maxPrice)}
       />
-      <Products
-        products={products}
-        category={category}
-        minPrice={minPrice}
-        maxPrice={maxPrice}
-      />
+      <Products category={category} minPrice={minPrice} maxPrice={maxPrice} />
     </>
   );
 };
