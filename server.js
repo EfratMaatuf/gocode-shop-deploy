@@ -120,7 +120,7 @@ app.delete("/api/products/:productId", async (req, res) => {
   const { productId } = req.params;
   console.log("Delete: " + productId);
   await Product.deleteOne({ _id: productId }).exec();
-  res.send("OK!");
+  res.send({ Text: "OK!" });
 });
 
 const PORT = process.env.PORT || 5000;

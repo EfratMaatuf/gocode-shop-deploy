@@ -5,7 +5,7 @@ import ProductAdmin from "../ProductAdmin/ProductAdmin";
 import NewProductAdmin from "../NewProductAdmin/NewProductAdmin";
 import ProductsContext from "../../contexts/ProductsContext";
 
-const ProductsAdmin = ({ category, categories, minPrice, maxPrice }) => {
+const ProductsAdmin = ({ category, minPrice, maxPrice }) => {
   const { products } = useContext(ProductsContext);
   let productsFilter;
   let productsFilterPrice;
@@ -33,7 +33,7 @@ const ProductsAdmin = ({ category, categories, minPrice, maxPrice }) => {
         </tr>
       </thead>
       <tbody>
-        <NewProductAdmin categories={categories} />
+        <NewProductAdmin />
         {productsFilterPrice.map(
           ({ _id, title, image, price, category, sale, description }) => (
             <ProductAdmin
@@ -54,7 +54,6 @@ const ProductsAdmin = ({ category, categories, minPrice, maxPrice }) => {
 };
 ProductsAdmin.propTypes = {
   category: PropTypes.string,
-  categories: PropTypes.array,
   minPrice: PropTypes.number,
   maxPrice: PropTypes.number,
 };

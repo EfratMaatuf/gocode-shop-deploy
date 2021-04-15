@@ -3,6 +3,7 @@ import "./ProductAdmin.css";
 import saleImage from "../Product/saleImage.png";
 import PropTypes from "prop-types";
 import ProductsContext from "../../contexts/ProductsContext";
+import MessagePopup from "../MessagePopup/MessagePopup";
 
 const ProductAdmin = ({
   id,
@@ -13,13 +14,19 @@ const ProductAdmin = ({
   sale,
   description,
 }) => {
+  const { products, setProducts } = useContext(ProductsContext);
   const [chengeTitle, setChengeTitle] = useState(title);
   const [chengeCategory, setChengeCategory] = useState(category);
   const [chengeDescription, setChengeDescription] = useState(description);
   const [chengePrice, setChengePrice] = useState(price);
   const [chengeImage, setChengeImage] = useState(image);
   const [onSale, setOnSale] = useState(sale);
-  const [products, setProducts] = useContext(ProductsContext);
+  const [showPopup, setShowPopup] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   const updateProduct = async () => {
     const res = await fetch("/api/products/" + id, {
@@ -37,21 +44,33 @@ const ProductAdmin = ({
       }),
     });
     const ans = await res.json();
+    console.log("ans in update:");
+    console.log(ans);
     if (ans.Text) {
-      alert("Updated");
+      setMessage("Updated");
+      console.log(message);
+      setShowPopup(true);
+      console.log(showPopup);
     }
   };
   const deleteProduct = async () => {
-    fetch("/api/products/" + id, {
+    const res = await fetch("/api/products/" + id, {
       method: "DELETE",
-    })
-      .then((res) => res.text()) // or res.json()
-      .then((res) => {
-        if (res === "OK!") {
-          setProducts(products.filter(({ _id }) => _id !== id));
-          alert("Product deleted");
-        }
-      });
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const ans = await res.json();
+    console.log("ans in deleted:");
+    console.log(ans);
+    if (ans.Text) {
+      setProducts(products.filter(({ _id }) => _id !== id));
+      setMessage("Product deleted");
+      console.log(message);
+      setShowPopup(true);
+      console.log(showPopup);
+      alert("Product deleted");
+    }
   };
   return (
     <tr>
@@ -128,7 +147,6 @@ const ProductAdmin = ({
           update
         </button>
         <br />
-
         <button
           className="deleteProduct"
           onClick={() => {
@@ -138,6 +156,9 @@ const ProductAdmin = ({
         >
           delete
         </button>
+        {showPopup && (
+          <MessagePopup closePopup={togglePopup} message={message} />
+        )}
       </td>
     </tr>
   );

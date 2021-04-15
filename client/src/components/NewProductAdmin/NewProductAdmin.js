@@ -2,15 +2,24 @@ import React, { useContext, useState } from "react";
 import "./NewProductAdmin.css";
 import saleImage from "../Product/saleImage.png";
 import ProductsContext from "../../contexts/ProductsContext";
+import CategoriesContext from "../../contexts/CategoriesContext";
+import MessagePopup from "../MessagePopup/MessagePopup";
 
-const NewProductAdmin = ({ categories }) => {
+const NewProductAdmin = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState();
   const [image, setImage] = useState("");
   const [sale, setSale] = useState(false);
-  const [products, setProducts] = useContext(ProductsContext);
+  const { products, setProducts } = useContext(ProductsContext);
+  const { categories } = useContext(CategoriesContext);
+  const [showPopup, setShowPopup] = useState(false);
+  const [message, setMessage] = useState();
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   const newProduct = async () => {
     const res = await fetch("/api/products", {
@@ -28,12 +37,12 @@ const NewProductAdmin = ({ categories }) => {
       }),
     });
     const ans = await res.json();
-    console.log("ans:");
-    console.log(ans);
     if (ans.Text) {
-      alert(ans.Text);
+      setMessage(ans.Text);
+      setShowPopup(true);
     } else {
-      alert("The product is added");
+      setMessage("The product is added");
+      setShowPopup(true);
       setProducts([ans, ...products]);
       setTitle("");
       setCategory("");
@@ -115,6 +124,9 @@ const NewProductAdmin = ({ categories }) => {
         <button className="newProduct" onClick={newProduct}>
           New product
         </button>
+        {showPopup && (
+          <MessagePopup closePopup={togglePopup} message={message} />
+        )}
       </td>
     </tr>
   );

@@ -3,7 +3,7 @@ import "./Sort.css";
 import Filter from "../Filter/Filter";
 import PropTypes from "prop-types";
 
-const Sort = ({ categories, changeCategory }) => {
+const Sort = ({ changeCategory }) => {
   const optionsSort = [
     "Featured",
     "Best Selling",
@@ -16,10 +16,7 @@ const Sort = ({ categories, changeCategory }) => {
   ];
   return (
     <div className="sort">
-      <Filter
-        options={categories}
-        changeCategory={(category) => changeCategory(category)}
-      />
+      <Filter changeCategory={(category) => changeCategory(category)} />
       <div className="collection-sort">
         <label>Sort by:</label>
         <select>
@@ -34,7 +31,6 @@ const Sort = ({ categories, changeCategory }) => {
   );
 };
 Sort.propTypes = {
-  categories: PropTypes.array,
   changeCategory: PropTypes.func,
 };
 export default Sort;

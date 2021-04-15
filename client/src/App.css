@@ -31,3 +31,14 @@ main {
   display: flex;
   justify-content: space-between;
 }
+.shoppingCartImg {
+  height: 25px;
+  transform: scaleX(-1);
+}
+.numSelectedItems {
+  background-color: red;
+  color: aliceblue;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+}

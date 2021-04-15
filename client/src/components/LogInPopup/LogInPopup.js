@@ -44,7 +44,7 @@ const LogInPopup = ({ closePopup }) => {
         <br />
 
         <div className="popupForm">
-          <label for="email">Email:</label>
+          <label htmlFor="email">Email:</label>
           <br />
           <input
             id="email"
@@ -54,7 +54,7 @@ const LogInPopup = ({ closePopup }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <br />
-          <label for="password">Password:</label>
+          <label htmlFor="password">Password:</label>
           <br />
           <input
             id="password"

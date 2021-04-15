@@ -28,7 +28,7 @@ const Product = ({ id, title, image, price, sale }) => {
   );
 };
 Product.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   title: PropTypes.string,
   image: PropTypes.string,
   price: PropTypes.number,

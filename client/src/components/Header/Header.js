@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import "./Header.css";
 import Sort from "../Sort/Sort";
-// import SliderPrice from "../SliderPrice/SliderPrice";
 import PropTypes from "prop-types";
 import { Slider } from "antd";
-// import { DatePicker } from 'antd';
 
-const Header = ({
-  categories,
-  changeCategory,
-  changeMinPrice,
-  changeMaxPrice,
-}) => {
+const Header = ({ changeCategory, changeMinPrice, changeMaxPrice }) => {
   const [minPrice, setMinPrice] = useState([0]);
   const [maxPrice, setMaxPrice] = useState([1000]);
 
@@ -30,10 +23,7 @@ const Header = ({
   return (
     <nav className="product-filter">
       <h1 className="titleHome">My Shop</h1>
-      <Sort
-        categories={categories}
-        changeCategory={(category) => changeCategory(category)}
-      />
+      <Sort changeCategory={(category) => changeCategory(category)} />
       &nbsp;&nbsp;
       <label className="labelPrice">{minPrice}$</label>
       &nbsp;
@@ -53,7 +43,6 @@ const Header = ({
   );
 };
 Header.propTypes = {
-  categories: PropTypes.array,
   changeCategory: PropTypes.func,
   changeMinPrice: PropTypes.func,
   changeMaxPrice: PropTypes.func,
